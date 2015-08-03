@@ -1,0 +1,22 @@
+<% c++ #include "data/admin/header.h" %>
+<% skin defskin %>
+<% view ViewName uses data::admin::dashboard   extends base_content %>
+<% template main_panel() %>
+<div id="ribbon">
+</div>
+<div id="content">
+    <div class="row hidden-mobile">
+    </div>
+    <!-- Conten is hear -->
+</div>
+<% end template%>
+<% template master_scripts() %>
+<script type="text/javascript">
+    $(document).ready(function() {
+	pageSetUp();
+    });
+</script>
+<% end template %>
+<% end view %>
+<% end skin %>
+

@@ -1,0 +1,64 @@
+<% c++ #include "data/admin/master.h" %>
+<% skin defskin %>
+<% view page uses data::admin::content extends base_content %>
+<% template page() %>
+<div id="ribbon">
+</div>
+<div id="content">
+    <div class="row hidden-mobile">
+    </div>
+    <section id="widget-grid">
+	<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+	    <div class="jarviswidget jarviswidget-sortable" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+		<header role="heading">
+		    <div class="jarviswidget-ctrls" role="menu">
+			<a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete">
+			    <i class="fa fa-times"></i>
+			</a>
+		    </div>
+		    <span class="widget-icon">
+			<i class="fa fa-edit"></i>
+		    </span>
+		    <h2>Users form</h2>
+		    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+		</header>
+		<div role="content">
+		    <div class="widget-body no-padding">
+			<div class="jarviswidget-editbox">
+			    <!-- This area used as dropdown edit box -->
+			</div>
+			<form class="smart-form">
+			    <!--<header></header>-->
+			    <fieldset>
+				<div class="row padd-bottom">
+				    <section class = "col col-2">
+					<article class="home-features-item" style="border-top-width: 0px;border-bottom-width: 0px;">
+					    <div style="height:80px;"><a href="#" class="">ООО Рога и Копытв</a></div>
+					</article>
+				    </section>
+
+				    <section class = "col col-2">
+					<article class="home-features-item" style="border-top-width: 0px;border-bottom-width: 0px;">
+					    <a href="#" class=""><i class="fa fa-6x fa-plus" style="color:rgb(205,205,205)"></i></a>
+					</article>
+				    </section>
+
+				</div>
+			    </fieldset>
+			</form>
+		    </div>
+		</div>
+	    </div>
+	<article>
+    </section>
+</div>
+<% end %>
+<% template master_scripts() %>
+<script type="text/javascript">
+    $(document).ready(function() {
+	pageSetUp();
+    });
+</script>
+<% end template %>
+<% end view %>
+<% end skin %>

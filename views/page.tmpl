@@ -1,0 +1,123 @@
+<% c++ #include "data/admin/master.h" %>
+<% skin defskin %>
+<% view page uses data::admin::page extends base_content %>
+<% template main_panel() %>
+<div id="ribbon">
+</div>
+<div id="content">
+    <div class="row hidden-mobile">
+    </div>
+    <section id="widget-grid" class="droppable" data-scope="layout">
+	<% foreach group in widget_group %>
+	<% item %>
+	<div class="row">
+	
+	    <% foreach widget in group.widgets %>
+	    <% item %>
+	    <article class="<%= widget.headlines %> sortable-grid ui-sortable">
+		<div class="jarviswidget jarviswidget-sortable" id="wid-id-<%= widget.widget_id %>" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+		    <header role="heading">
+			<div class="jarviswidget-ctrls" role="menu">
+			    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete">
+				<i class="fa fa-times"></i>
+			    </a>
+			</div>
+			<span class="widget-icon">
+			    <i class="<%= widget.widget_icon %>"></i>
+			</span>
+			<h2><%= widget.widget_name %></h2>
+			<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+		    </header>
+		    <div role="content">
+			<div class="widget-body no-padding">
+			    <div class="jarviswidget-editbox">
+				<!-- This area used as dropdown edit box -->
+			    </div>
+			    <div id="<%= widget.widget_id %>" role="form-content">
+				<!-- This area used as forms panel -->
+				<% include form_content(widget.content) %>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	    </article>
+	    <% end item %>
+	    <% end foreach%>
+	</div>
+	<% end item%>
+	<% end foreach %>
+    </section>
+</div>
+<% end template %>
+<% template form_content(data::admin::FormContent cont) %>
+<form class="<%= cont.form_class %>">
+    <% if not empty cont.header %>
+    <header><%= cont.header %></header>
+    <% end if %>
+    <fieldset>
+    <% if cont.is_smart %>
+	<div class="row">
+	    <% foreach section in cont.sections %>
+	    <% item %>
+		<section class="<%= section.headline %>">
+		    <% if (section.type == 1) %>
+		    <label class="input">
+			<i class="<%= section.icons %>"></i>
+			<input type="<%= section.type %>" name="<%= section.name %>" placeholder="<%= section.placeholder %>">
+			<% if not empty section.tooltip %>
+			<b class="tooltip tooltip-bottom-right"><%= section.tooltip %></b>
+			<% end %>
+		    </label>
+		    <% elif (section.type == 2) %>
+		    <label class="radio">
+			<input type="radio" name="radio-inline" checked="">
+			<i></i><%= section.text %>
+		    </label>
+		    <% elif (section.type == 3) %>
+		    <label class="checkbox">
+			<input type="checkbox" name="<%= section.name %>" id="<%= section.id %>">
+			<i></i><%= section.text%>
+		    </label>
+		    <% elif (section.type == 4) %>
+		    <label class="select">
+			<select name="<%= section.name %>">
+			    <% foreach option in section.options %>
+			    <% item %>
+			    <option value="<%= option.value %>" selected="<%= option.selected %>" disabled="<%= option.desabled %>"><%= option.text%></option>
+			    <% end item %>
+			    <% end foreach %>
+			</select> <i></i> 
+		    </label>
+		    <% elif (section.type == 5) %>
+		    <label class="input"> <i class="icon-append fa fa-calendar"></i>
+			<input type="text" name="<%= section.name %>" id="<%= section.id %>" placeholder="<%= section.placeholder %>" class="hasDatepicker">
+		    </label>
+		    <% end %>
+		</section>
+	    <% end item %>
+	    <% end foreach %>
+	</div>
+    <% elif cont.is_plugins %>
+
+    <% else %>
+
+    <% end %>
+    </fieldset>
+    <footer>
+    <% foreach item in cont.footer %>
+    <% item %>
+	<%= item.content|raw %>
+    <% end %>
+    <% end %>
+    </footer>
+</form>
+<% end template%>
+<% template master_scripts() %>
+<script type="text/javascript">
+    $(document).ready(function() {
+	pageSetUp();
+    });
+</script>
+<% end template %>
+<% end view %>
+<% end skin %>

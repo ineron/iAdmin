@@ -1,0 +1,243 @@
+<% c++ #include "apps/data/messages.h" %>
+<% skin defskin %>
+<% view Compose uses data::admin::messages::Compose  %>
+<% template header() %>
+
+<h2 class="email-open-header">
+	Новое письмо <span class="label txt-color-white">ЧЕРНОВИК</span>
+	<a href="javascript:void(0);" rel="tooltip" data-placement="left" data-original-title="Print" class="txt-color-darken pull-right"><i class="fa fa-print"></i></a>	
+</h2>
+
+<form enctype="multipart/form-data" action="dummy.php" method="POST" class="form-horizontal" id="email-compose-form">
+
+	<div class="inbox-info-bar no-padding">
+		<div class="row">
+			<div class="form-group">
+				<label class="control-label col-md-1"><strong>Кому</strong></label>
+				<div class="col-md-11">
+					<select multiple style="width:100%" class="select2" data-select-search="true">
+					<% foreach item in emailList %>
+					<% item %>
+						<option value="<%= item.value%>"><%= item.name %></option>
+					<% end %>
+					<% end %>
+					</select>
+					<em><a href="javascript:void(0);" class="show-next" rel="tooltip" data-placement="bottom" data-original-title="Carbon Copy">CC</a></em>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	<div class="inbox-info-bar no-padding hidden">
+		<div class="row">
+			<div class="form-group">
+				<label class="control-label col-md-1"><strong>Копия</strong></label>
+				<div class="col-md-11">
+					<select multiple style="width:100%" class="select2" data-select-search="true">
+					<% foreach item in emailList %>
+					<% item %>
+						<option value="<%= item.value%>"><%= item.name %></option>
+					<% end %>
+					<% end %>
+					</select>
+					<em><a href="javascript:void(0);" class="show-next" rel="tooltip" data-placement="bottom" data-original-title="Blind Carbon Copy">BCC</a></em>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="inbox-info-bar no-padding hidden">
+		<div class="row">
+			<div class="form-group">
+				<label class="control-label col-md-1"><strong>Скрытая</strong></label>
+				<div class="col-md-11">
+					<select multiple style="width:100%" class="select2" data-select-search="true">
+					<% foreach item in emailList %>
+					<% item %>
+						<option value="<%= item.value%>"><%= item.name %></option>
+					<% end %>
+					<% end %>
+					</select>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	<div class="inbox-info-bar no-padding">
+		<div class="row">
+			<div class="form-group">
+				<label class="control-label col-md-1"><strong>Тема</strong></label>
+				<div class="col-md-11">
+					<input class="form-control" placeholder="Тема письма" type="text">
+					<em><a href="javascript:void(0);" class="show-next" rel="tooltip" data-placement="bottom" data-original-title="Attachments"><i class="fa fa-paperclip fa-lg"></i></a></em>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="inbox-info-bar no-padding hidden">
+		<div class="row">
+			<div class="form-group">
+				<label class="control-label col-md-1"><strong>Приложения</strong></label>
+				<div class="col-md-11">
+					<input class="form-control fileinput" type="file" multiple="multiple">
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	<div class="inbox-message no-padding">
+	
+		<div id="emailbody">
+			
+		</div>	
+	</div>
+	
+	<div class="inbox-compose-footer">
+
+	<button class="btn btn-danger" type="button">
+		Удалить
+	</button>
+		
+	<button class="btn btn-info" type="button">
+		Черновик
+	</button>
+
+	<button data-loading-text="&lt;i class='fa fa-refresh fa-spin'&gt;&lt;/i&gt; &nbsp; Sending..." class="btn btn-primary pull-right" type="button" id="send">
+		Отправить <i class="fa fa-arrow-circle-right fa-lg"></i>
+	</button>
+
+
+	</div>
+
+</form>
+
+<% if (0) %>
+<div class="email-infobox">
+
+	<div class="well well-sm well-light">
+		<h5>Related Invoice</h5>
+		<ul class="list-unstyled">
+			<li>
+				<i class="fa fa-file fa-fw text-success"></i><a href="javascript:void(0);"> #4831 - Paid</a>
+			</li>
+			<li>
+				<i class="fa fa-file fa-fw text-danger"></i><a href="javascript:void(0);"><strong> #4835 - Unpaid</strong></a>
+			</li>
+		</ul>
+
+
+	</div>
+
+	<div class="well well-sm well-light">
+		<h5>Upcoming Meetings</h5>
+		
+		<p>
+			<span class="label label-success"><i class="fa fa-check"></i> <strike>Agenda Review @ 10 AM</strike> </span>
+		</p>
+
+		<p>
+			<span class="label label-primary"><i class="fa fa-clock-o"></i> Client Meeting @ 2:30 PM</span>
+		</p>
+
+		<p>
+			<span class="label label-warning"><i class="fa fa-clock-o"></i> Salary Review @ 4:00 PM</span>
+		</p>		
+	</div>	
+
+	<ul class="list-inline">
+		<li><img src="img/avatars/5.png" alt="me" width="30px"></li>
+		<li><img src="img/avatars/3.png" alt="me" width="30px"></li>
+		<li><img src="img/avatars/sunny.png" alt="me" width="30px"></li>
+		<li><a href="javascript:void(0);">1 more</a></li>
+	</ul>
+
+</div>
+<% end %>
+
+<script type="text/javascript">
+	
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	//pageSetUp();
+	
+	//here we only run
+	runAllForms();
+
+	 // PAGE RELATED SCRIPTS
+
+	$(".table-wrap [rel=tooltip]").tooltip();
+
+	/*
+	 * SUMMERNOTE EDITOR
+	 */
+	loadScript("media/js/plugin/summernote/summernote.min.js", iniEmailBody);
+
+	function iniEmailBody() {
+	    $('#emailbody').summernote({
+	        height: '100%',
+	        focus: false,
+	        tabsize: 2
+	    });
+	}
+
+	$(".show-next").click(function () {
+	    $this = $(this);
+	    $this.hide();
+	    $this.parent().parent().parent().parent().parent().next().removeClass("hidden");
+	})
+
+	 $("#send").click(function () {
+
+	    var $btn = $(this);
+	    $btn.button('loading');
+
+	    // wait for animation to finish and execute send script
+	    setTimeout(function () {
+	        //Insert send script here
+
+
+	        // Load inbox once send is complete
+	        loadURL("ajax/email/email-list.html", $('#inbox-content > .table-wrap'))
+
+	    }, 1000); // how long do you want the delay to be? 
+	});
+	
+	
+</script>
+
+<% end template %>
+
+<% template render() %>
+    <% include header() %>
+<% end  %>
+<% end view %>
+<% end skin %>

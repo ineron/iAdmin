@@ -1,0 +1,45 @@
+<% c++ #include "data/admin/nav.h" %>
+<% skin defskin %>
+<% view nav uses data::admin::nav_panel %>
+<% template nav_panel(data::admin::NavItemsList navItems) %>
+
+<% foreach item in navItems %>
+<ul>
+<% item %>
+    <li>
+        <a href="<%= item.url %>"  title="<%= item.title%>" >
+            <i class="<%= item.icon%>"></i>
+            <span class="<%= item.style %>"><%= item.title %></span>
+            <% if not empty item.badge %>
+            <span class="badge pull-right inbox-badge"><%= item.badge %></span>
+            <% end if %>
+        </a>
+        <% include nav_panel(item.child) %>
+    </li>
+<% end item %>
+</ul>
+<% end foreach %>
+
+<% end template %>
+
+<% template subItems(data::admin::NavItemsList items) %>
+<% foreach item in items %>
+<ul>
+<% item %>
+    <li>
+        <a href="<%= item.url %>"  title="<%= item.title%>" >
+            <i class="<%= item.icon%>"></i>
+            <span class="<%= item.style %>"><%= item.title %></span>
+            <% if not empty item.badge %>
+            <span class="badge pull-right inbox-badge"><%= item.badge %></span>
+            <% end if %>
+        </a>
+        <% include subItems(item.child) %>
+    </li>
+<% end item %>
+</ul>
+<% end foreach %>
+
+<% end template %>
+<% end view %>
+<% end skin %>
